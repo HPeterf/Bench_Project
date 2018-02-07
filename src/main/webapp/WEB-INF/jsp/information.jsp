@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 
-
 <html>
 	<body>
 
@@ -9,6 +8,16 @@
 		<h2>Tagok:</h2>
 		<p>Ollai Norbert</p>
 		<p>Horváth Péter</p>
+		
+		<div class="container">
 
+		<div class="starter-template">
+			<h2>${message}</h2>
+		</div>
+
+	</div>
+		
+		
+		
 	</body>
 </html>
