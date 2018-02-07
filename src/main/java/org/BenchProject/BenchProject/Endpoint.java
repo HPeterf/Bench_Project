@@ -10,5 +10,4 @@ public class Endpoint {
 	public String index() {
 		return "Horváth Péter";
 	}
-
 }
