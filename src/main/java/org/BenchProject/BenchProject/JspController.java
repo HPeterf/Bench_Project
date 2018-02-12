@@ -20,4 +20,5 @@ public class JspController {
 		model.put("message", this.message);
 		return "information";
 	}
+
 }
