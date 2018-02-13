@@ -1,11 +1,13 @@
 package org.BenchProject.Service;
 
+import java.util.List;
+
 import org.BenchProject.Model.Names;
 
 public interface NamesService {
 
-	public Iterable<Names> listAllNames();
+	public void addNames(Names names);
 
-	public Names saveNames(Names names);
+	public List<Names> listAllNames();
 
 }

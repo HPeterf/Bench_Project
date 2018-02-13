@@ -1,8 +1,13 @@
 package org.BenchProject.Repository;
 
-import org.BenchProject.Model.Names;
-import org.springframework.data.repository.CrudRepository;
+import java.util.List;
 
-public interface INames extends CrudRepository<Names, Long> {
+import org.BenchProject.Model.Names;
+
+public interface INames {
+
+	public void addNames(Names names);
+
+	public List<Names> listAllNames();
 
 }

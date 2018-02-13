@@ -3,6 +3,7 @@ package org.BenchProject.BenchProject;
 import org.BenchProject.Model.Names;
 import org.BenchProject.Service.NamesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,27 +14,35 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/add")
 public class InputController {
 
-	private static final String ROUTING_ADD = "/add";
+	// private static final String ROUTING_ADD = "/add";
 	// private static final String ROUTING_ADD_RESULT = "/bevitel";
 	// private static final String ROUTING_FULL_LIST = "/lista";
 	//
-	private static final String JSP_ADD = "add";
+	// private static final String JSP_ADD = "add";
 	// private static final String JSP_ADD_RESULT = "bevitel";
 	// private static final String JSP_FULL_LIST = "lista";
 
 	private NamesService namesService;
 
-	@Autowired
+	@Autowired(required = true)
+	@Qualifier(value = "NamesService")
 	public void setNamesService(NamesService namesService) {
 		this.namesService = namesService;
 	}
 
+	// @RequestMapping(value = "/lista", method = RequestMethod.GET)
+	// public ModelAndView list() {
+	// ModelAndView model = new ModelAndView("lista");
+	// model.addObject("list", namesService.listAllNames());
+	// return model;
+	// }
+
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public ModelAndView saveNames(@ModelAttribute("name") Names names) {
+	public ModelAndView addName(@ModelAttribute("names") Names names) {
 		ModelAndView model = new ModelAndView("add");
 		if (names != null) {
-			namesService.saveNames(names);
-			model.addObject("warning", "User Registration Success");
+			namesService.addNames(names);
+			model.addObject("warning", "Name Registration Success");
 
 		} else {
 			model.addObject("danger", "Something Going Bad");
@@ -42,10 +51,9 @@ public class InputController {
 		return new ModelAndView("redirect:/add");
 	}
 
-	public static String GetRoutingAdd() {
-		return ROUTING_ADD;
-	}
-
+	// public static String GetRoutingAdd() {
+	// return ROUTING_ADD;
+	// }
 	//
 	// public static String GetRoutingAddResult() {
 	// return ROUTING_ADD_RESULT;
@@ -55,12 +63,10 @@ public class InputController {
 	// return ROUTING_FULL_LIST;
 	// }
 	//
-	//
-	//
-	@RequestMapping(ROUTING_ADD)
-	public String add() {
-		return JSP_ADD;
-	}
+	// @RequestMapping(ROUTING_ADD)
+	// public String add() {
+	// return JSP_ADD;
+	// }
 	//
 	// @RequestMapping(ROUTING_ADD_RESULT)
 	// public String addResult() {
