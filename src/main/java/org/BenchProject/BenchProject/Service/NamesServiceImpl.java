@@ -1,13 +1,13 @@
-package org.BenchProject.Service;
+package org.BenchProject.BenchProject.Service;
 
 import java.util.Date;
 import java.util.List;
 
-import org.BenchProject.Model.Names;
-import org.BenchProject.Service.Exceptions.EmtyFieldException;
-import org.BenchProject.Service.Exceptions.InsertFailedException;
-import org.BenchProject.Service.Exceptions.NameAlreadyTakenException;
-import org.BenchProject.Service.Exceptions.NamesException;
+import org.BenchProject.BenchProject.Model.Names;
+import org.BenchProject.BenchProject.Service.Exceptions.EmtyFieldException;
+import org.BenchProject.BenchProject.Service.Exceptions.InsertFailedException;
+import org.BenchProject.BenchProject.Service.Exceptions.NameAlreadyTakenException;
+import org.BenchProject.BenchProject.Service.Exceptions.NamesException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,9 +59,9 @@ public class NamesServiceImpl implements NamesService {
 		List<Names> namesList = namesRepo.listAllNames();
 
 		logger.info("START");
-		logger.info("Human's number: " + namesList.size());
+		logger.info("Names' number: " + namesList.size());
 
-		for (int i = 0; i < namesList.size(); ++i) {
+		for (int i = 0; i < namesList.size(); i++) {
 			logger.info(namesList.get(i).getName());
 		}
 		return namesList;

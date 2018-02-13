@@ -1,4 +1,4 @@
-package org.BenchProject.Model;
+package org.BenchProject.BenchProject.Model;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -38,6 +38,10 @@ public class Names implements Serializable {
 
 	public Names() {
 		super();
+	}
+
+	public Names(String name) {
+		this.name = name;
 	}
 
 	public Names(String name, Date date) {

@@ -1,4 +1,4 @@
-package org.BenchProject.Service.Exceptions;
+package org.BenchProject.BenchProject.Service.Exceptions;
 
 public class EmtyFieldException extends NamesException {
 

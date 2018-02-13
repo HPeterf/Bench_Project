@@ -1,10 +1,8 @@
 package org.BenchProject.BenchProject;
 
-import java.util.Date;
-
-import org.BenchProject.Model.Names;
-import org.BenchProject.Service.NamesService;
-import org.BenchProject.Service.Exceptions.NamesException;
+import org.BenchProject.BenchProject.Model.Names;
+import org.BenchProject.BenchProject.Service.NamesService;
+import org.BenchProject.BenchProject.Service.Exceptions.NamesException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,12 +49,12 @@ public class InputController {
 	}
 
 	@RequestMapping(value = ROUTING_ADD_RESULT, method = RequestMethod.POST)
-	public ModelAndView addResult(@RequestParam(value = POST_PARAM_ADD_RESULT) final String name, final Date date) {
+	public ModelAndView addResult(@RequestParam(value = POST_PARAM_ADD_RESULT) final String name) {
 		String resultId = "result";
 		String errorId = "error";
 		String errorHeader = "Error!";
 		ModelAndView modelAndView = new ModelAndView(JSP_ADD_RESULT);
-		Names names = new Names(name, date);
+		Names names = new Names(name);
 		String result;
 		try {
 			result = namesService.addNames(names);

@@ -5,8 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 
-@SpringBootApplication(scanBasePackages = { "org.BenchProject.BenchPoject", "org.BenchProject.Model",
-		"org.BenchProject.Repository", "org.BencProject.Service" })
+@SpringBootApplication
 public class BenchProjectApplication extends SpringBootServletInitializer {
 
 	@Override
