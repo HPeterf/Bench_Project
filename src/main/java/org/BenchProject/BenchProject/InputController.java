@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-@RequestMapping("/add")
 public class InputController {
 
 	private static final String ROUTING_ADD = "/add";
@@ -54,6 +53,8 @@ public class InputController {
 	@RequestMapping(value = ROUTING_ADD_RESULT, method = RequestMethod.POST)
 	public ModelAndView addResult(@RequestParam(value = POST_PARAM_ADD_RESULT) final String name, final Date date) {
 		String resultId = "result";
+		String errorId = "error";
+		String errorHeader = "Error!";
 		ModelAndView modelAndView = new ModelAndView(JSP_ADD_RESULT);
 		Names names = new Names(name, date);
 		String result;
@@ -62,7 +63,7 @@ public class InputController {
 		} catch (NamesException e) {
 			result = e.getMessage();
 
-			modelAndView.addObject("error", "error");
+			modelAndView.addObject(errorId, errorHeader);
 		}
 		modelAndView.addObject(resultId, result);
 		return modelAndView;

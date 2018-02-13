@@ -6,7 +6,12 @@
 <body>
 	<b>Result:</b>
 	<br>
-	<p><c:out value="${result}"/></p>
+	<p>
+		<c:out value="${result}" />
+	</p>
+	<p>
+		<c:out value="${error}" />
+	</p>
 	<br>
 	<a href="/add">New record</a>
 	<br>

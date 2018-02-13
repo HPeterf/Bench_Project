@@ -12,9 +12,10 @@
 		<tr>
 			<th>ID</th>
 			<th>Name</th>
+			<th>Date</th>
 		</tr>
 
-		<c:forEach items="${names}" var="human">
+		<c:forEach items="${names}" var="names">
 			<tr>
 				<td><c:out value="${names.id}" /></td>
 				<td><c:out value="${names.name}" /></td>

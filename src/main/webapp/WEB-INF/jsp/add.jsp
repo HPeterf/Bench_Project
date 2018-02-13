@@ -6,7 +6,7 @@
 </head>
 
 <body>
-	<form action="addResult" method="POST">
+	<form action="bevitel" method="POST">
 		<b>Name:</b>
 		<br>
 
