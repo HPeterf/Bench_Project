@@ -1,13 +1,8 @@
 package org.BenchProject.Repository;
 
-import java.util.List;
-
 import org.BenchProject.Model.Names;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface INames {
-
-	public void addNames(Names names);
-
-	public List<Names> listAllNames();
+public interface INames extends JpaRepository<Names, Long> {
 
 }

@@ -1,28 +1,32 @@
 <!DOCTYPE html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<%@ page session="false" %>
 
 <html>
 
-	<body>
-	<h1> Felvitt nevek: </h1>
-	<table class="tg">
-	<tr>
-		<th width="80">Name</th>
-	</tr>
-	
-	<c:forEach items="${listAllNames}" var="names">
+<head>
+</head>
+
+<body>
+	<table border="1" width="50%">
+
 		<tr>
-			<td>${names.name}</td>
+			<th>ID</th>
+			<th>Name</th>
 		</tr>
-	</c:forEach>
-	
+
+		<c:forEach items="${names}" var="human">
+			<tr>
+				<td><c:out value="${names.id}" /></td>
+				<td><c:out value="${names.name}" /></td>
+				<td><c:out value="${names.date}" /></td>
+			</tr>
+		</c:forEach>
 	</table>
-	
 </body>
-<br><br>
-<a href="/add">New Record</a>
+
+<br>
+<br>
+
+<a href="/add">New record</a>
 
 </html>

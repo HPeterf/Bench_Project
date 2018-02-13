@@ -1,46 +1,69 @@
 package org.BenchProject.Service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.BenchProject.Model.Names;
-import org.BenchProject.Repository.INames;
+import org.BenchProject.Service.Exceptions.EmtyFieldException;
+import org.BenchProject.Service.Exceptions.InsertFailedException;
+import org.BenchProject.Service.Exceptions.NameAlreadyTakenException;
+import org.BenchProject.Service.Exceptions.NamesException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class NamesServiceImpl implements NamesService {
 
-	private INames namesRepo;
+	@Autowired
+	NamesService namesRepo;
 
-	public void setINames(INames namesRepo) {
-		this.namesRepo = namesRepo;
-	}
+	private static final Logger logger = LoggerFactory.getLogger(NamesServiceImpl.class);
 
 	@Override
-	@Transactional
-	public void addNames(Names names) {
-		this.namesRepo.addNames(names);
+	public String addNames(Names names) throws NamesException {
+		if (names.getName().trim().length() == 0) {
+			throw new EmtyFieldException();
+		} else {
+			names.setName(names.getName().trim());
 
+			logger.info("Search in DB by name: " + names.getName());
+			List<Names> NamesList = namesRepo.listAllNames();
+
+			final String searchableName = names.getName();
+
+			for (Names item : NamesList) {
+				if (item.getName().equals(searchableName)) {
+					throw new NameAlreadyTakenException();
+				}
+			}
+
+			logger.info("No match, insert start");
+
+			try {
+
+				names.setDate(new Date());
+				namesRepo.addNames(names);
+				return "Save successful";
+
+			} catch (Exception e) {
+				logger.error("Insert failed: " + e.toString());
+				throw new InsertFailedException();
+			}
+		}
 	}
 
 	@Override
 	public List<Names> listAllNames() {
-		return this.namesRepo.listAllNames();
+		List<Names> namesList = namesRepo.listAllNames();
+
+		logger.info("START");
+		logger.info("Human's number: " + namesList.size());
+
+		for (int i = 0; i < namesList.size(); ++i) {
+			logger.info(namesList.get(i).getName());
+		}
+		return namesList;
 	}
-
-	// @Autowired
-	// public void setNamesRepo(INames namesRepo) {
-	// this.namesRepo = namesRepo;
-	// }
-	//
-	// @Override
-	// public Iterable<Names> listAllNames() {
-	// return namesRepo.findAll();
-	// }
-	//
-	// @Override
-	// public Names addNames(Names names) {
-	// return namesRepo.save(names);
-	// }
-
 }
