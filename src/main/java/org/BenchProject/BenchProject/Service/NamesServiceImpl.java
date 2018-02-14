@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.BenchProject.BenchProject.Model.Names;
+import org.BenchProject.BenchProject.Repository.INames;
 import org.BenchProject.BenchProject.Service.Exceptions.EmtyFieldException;
 import org.BenchProject.BenchProject.Service.Exceptions.InsertFailedException;
 import org.BenchProject.BenchProject.Service.Exceptions.NameAlreadyTakenException;
@@ -17,7 +18,7 @@ import org.springframework.stereotype.Service;
 public class NamesServiceImpl implements NamesService {
 
 	@Autowired
-	NamesService namesRepo;
+	INames namesRepo;
 
 	private static final Logger logger = LoggerFactory.getLogger(NamesServiceImpl.class);
 
@@ -29,7 +30,7 @@ public class NamesServiceImpl implements NamesService {
 			names.setName(names.getName().trim());
 
 			logger.info("Search in DB by name: " + names.getName());
-			List<Names> NamesList = namesRepo.listAllNames();
+			List<Names> NamesList = namesRepo.findAll();
 
 			final String searchableName = names.getName();
 
@@ -44,7 +45,7 @@ public class NamesServiceImpl implements NamesService {
 			try {
 
 				names.setDate(new Date());
-				namesRepo.addNames(names);
+				namesRepo.save(names);
 				return "Save successful";
 
 			} catch (Exception e) {
@@ -56,7 +57,7 @@ public class NamesServiceImpl implements NamesService {
 
 	@Override
 	public List<Names> listAllNames() {
-		List<Names> namesList = namesRepo.listAllNames();
+		List<Names> namesList = namesRepo.findAll();
 
 		logger.info("START");
 		logger.info("Names' number: " + namesList.size());
