@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity(name = "Names")
 @Table(name = "Names")
@@ -24,6 +25,7 @@ public class Names implements Serializable {
 	private String id;
 
 	@NotNull
+	@NotBlank
 	@Column(name = "name")
 	private String name;
 
@@ -65,7 +67,7 @@ public class Names implements Serializable {
 	}
 
 	public void setName(String name) {
-		this.name = name;
+		this.name = name.trim();
 	}
 
 	@Override

@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.BenchProject.BenchProject.Model.Names;
-import org.BenchProject.BenchProject.Repository.INames;
+import org.BenchProject.BenchProject.Repository.NamesRepository;
 import org.BenchProject.BenchProject.Service.Exceptions.EmtyFieldException;
 import org.BenchProject.BenchProject.Service.Exceptions.InsertFailedException;
 import org.BenchProject.BenchProject.Service.Exceptions.NameAlreadyTakenException;
@@ -13,21 +13,23 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.TransactionSystemException;
 
 @Service
 public class NamesServiceImpl implements NamesService {
 
 	@Autowired
-	INames namesRepo;
+	NamesRepository namesRepo;
 
 	private static final Logger logger = LoggerFactory.getLogger(NamesServiceImpl.class);
 
 	@Override
 	public String addNames(Names names) throws NamesException {
-		if (names.getName().trim().length() == 0) {
+		if (names.getName().isEmpty()) {
 			throw new EmtyFieldException();
+
 		} else {
-			names.setName(names.getName().trim());
+			names.setName(names.getName());
 
 			logger.info("Search in DB by name: " + names.getName());
 			List<Names> NamesList = namesRepo.findAll();
@@ -48,7 +50,12 @@ public class NamesServiceImpl implements NamesService {
 				namesRepo.save(names);
 				return "Save successful";
 
-			} catch (Exception e) {
+			} catch (TransactionSystemException e) {
+				logger.error("Empty field: " + e.toString());
+				throw new EmtyFieldException();
+			}
+
+			catch (Exception e) {
 				logger.error("Insert failed: " + e.toString());
 				throw new InsertFailedException();
 			}
