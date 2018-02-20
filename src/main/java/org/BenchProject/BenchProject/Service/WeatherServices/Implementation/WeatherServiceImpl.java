@@ -8,7 +8,9 @@ import org.BenchProject.BenchProject.Service.WeatherServices.Providers.OpenWeath
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class WeatherServiceImpl implements WeatherService {
 
 	private static final Logger logger = LoggerFactory.getLogger(WeatherServiceImpl.class);
@@ -25,6 +27,8 @@ public class WeatherServiceImpl implements WeatherService {
 	@Override
 	public float getTemperatureFromCity(String city) throws Exception {
 
+		city = formatCityName(city);
+
 		switch (weatherConfig.getWeatherConfig()) {
 		case PROVIDER_1:
 			return accuweatherProvider.getTemperatureByCity(city);
@@ -33,5 +37,14 @@ public class WeatherServiceImpl implements WeatherService {
 		default:
 			throw new ProviderEnumNotExistsException();
 		}
+	}
+
+	private String formatCityName(String city) {
+		city = city.toLowerCase();
+		city.replace("á", "a");
+		city.replace("é", "e");
+
+		return city;
+
 	}
 }

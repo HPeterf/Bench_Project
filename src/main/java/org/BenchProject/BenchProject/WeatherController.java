@@ -43,13 +43,17 @@ public class WeatherController {
 		try {
 			float result = weatherService.getTemperatureFromCity(cityName);
 			resultMessage = "" + result;
+			logger.info("Result: " + result);
 			modelAndView.addObject(RESULT_ID, result);
 		} catch (WeatherException e) {
 			resultMessage = e.getMessage();
+			logger.info("WeatherException is: " + e.getMessage());
 			modelAndView.addObject(ERROR_ID, resultMessage);
 		} catch (Exception e) {
 			resultMessage = e.getMessage();
-			modelAndView.addObject(ERROR_ID, "Error!");
+			e.printStackTrace();
+			logger.info("Exception/Error is: " + e.getMessage());
+			modelAndView.addObject(ERROR_ID, resultMessage);
 		}
 		logger.info("RESULT MESSAGE: " + resultMessage);
 		return modelAndView;
