@@ -9,6 +9,25 @@ import org.springframework.web.client.RestTemplate;
 
 public abstract class WeatherProviderBase {
 
+	public WeatherProviderBase(String name) {
+		this.setName(name);
+	}
+
+	private String name;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return this.getName();
+	}
+
 	private static final Logger logger = LoggerFactory.getLogger(WeatherProviderBase.class);
 
 	public abstract float getTemperatureByCity(String city) throws Exception;

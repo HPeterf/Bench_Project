@@ -10,11 +10,15 @@ import org.springframework.web.client.HttpClientErrorException;
 
 @Component
 public class OpenWeatherProvider extends WeatherProviderBase {
+	public OpenWeatherProvider() {
+		super(PROVIDER_NAME);
+	}
 
 	private static final Logger logger = LoggerFactory.getLogger(OpenWeatherProvider.class);
 	private static final String API_KEY = "c4b10d6bd0adc8d89ea76d6ed6ad0314";
 	private static final String SEARCH_PATTERN = "http://api.openweathermap.org/data/2.5/weather?q=%s&appid=%s";
 	private static final String CITY_NOT_FOUND = "City not found";
+	private static final String PROVIDER_NAME = "OpenWeather";
 
 	@Override
 	public float getTemperatureByCity(String city) throws Exception {

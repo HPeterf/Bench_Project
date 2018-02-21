@@ -10,8 +10,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AccuWeatherProvider extends WeatherProviderBase {
+	public AccuWeatherProvider() {
+		super(PROVIDER_NAME);
+	}
 
 	private static final Logger logger = LoggerFactory.getLogger(AccuWeatherProvider.class);
+
+	private static final String PROVIDER_NAME = "AccuWeather";
 
 	private static final String API_KEY = "uriLRgNFXC4YLuhjcu6fivWaKdTRy9l3";
 	private static final String MAIN_PAGE = "http://dataservice.accuweather.com";
