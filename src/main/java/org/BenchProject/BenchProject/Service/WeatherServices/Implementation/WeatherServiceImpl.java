@@ -5,6 +5,7 @@ import org.BenchProject.BenchProject.Service.WeatherServices.Config.WeatherProvi
 import org.BenchProject.BenchProject.Service.WeatherServices.Exceptions.ProviderEnumNotExistsException;
 import org.BenchProject.BenchProject.Service.WeatherServices.Providers.AccuWeatherProvider;
 import org.BenchProject.BenchProject.Service.WeatherServices.Providers.OpenWeatherProvider;
+import org.BenchProject.BenchProject.Service.WeatherServices.Providers.WeatherProviderBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,13 +28,22 @@ public class WeatherServiceImpl implements WeatherService {
 	@Override
 	public float getTemperatureFromCity(String city) throws Exception {
 
+		WeatherProviderBase weatherProvider = null;
+
 		switch (weatherConfig.getWeatherConfig()) {
 		case PROVIDER_1:
-			return accuweatherProvider.getTemperatureByCity(city);
+			weatherProvider = accuweatherProvider;
+			break;
 		case PROVIDER_2:
-			return openweatherProvider.getTemperatureByCity(city);
+			weatherProvider = openweatherProvider;
+			break;
 		default:
 			throw new ProviderEnumNotExistsException();
 		}
+
+		logger.info(String.format("Implementation of %s is initialized as %s.", "WeatherProvider",
+				weatherProvider.toString()));
+
+		return weatherProvider.getTemperatureByCity(city);
 	}
 }
