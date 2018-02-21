@@ -13,7 +13,7 @@ public class AccuWeatherProvider extends WeatherProviderBase {
 
 	private static final Logger logger = LoggerFactory.getLogger(AccuWeatherProvider.class);
 
-	private static final String API_KEY = "W7V4AhKA09uXZYgQAgQGv31hvLV4GGXA";
+	private static final String API_KEY = "uriLRgNFXC4YLuhjcu6fivWaKdTRy9l3";
 	private static final String MAIN_PAGE = "http://dataservice.accuweather.com";
 
 	private static final String SEARCH_FOR_CITY = "%s/locations/v1/cities/search?apikey=%s&q=%s";

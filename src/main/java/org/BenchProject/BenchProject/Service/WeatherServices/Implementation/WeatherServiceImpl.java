@@ -27,8 +27,6 @@ public class WeatherServiceImpl implements WeatherService {
 	@Override
 	public float getTemperatureFromCity(String city) throws Exception {
 
-		city = formatCityName(city);
-
 		switch (weatherConfig.getWeatherConfig()) {
 		case PROVIDER_1:
 			return accuweatherProvider.getTemperatureByCity(city);
@@ -37,14 +35,5 @@ public class WeatherServiceImpl implements WeatherService {
 		default:
 			throw new ProviderEnumNotExistsException();
 		}
-	}
-
-	private String formatCityName(String city) {
-		city = city.toLowerCase();
-		city.replace("á", "a");
-		city.replace("é", "e");
-
-		return city;
-
 	}
 }
