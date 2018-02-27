@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class Endpoint {
+public class EndpointController {
 
 	@RequestMapping(value = "/name", method = RequestMethod.GET)
 	public String index() {

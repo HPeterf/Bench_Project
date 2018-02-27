@@ -13,8 +13,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(Endpoint.class)
-public class EndpointTest {
+@WebMvcTest(EndpointController.class)
+public class EndpointControllerTest {
 
 	@Autowired
 	private MockMvc mockMvc;

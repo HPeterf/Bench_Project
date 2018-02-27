@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class HttpStat {
+public class HttpStatController {
 
 	@RequestMapping(value = "/404", method = RequestMethod.GET)
 	public HttpStatus NotFound() {
