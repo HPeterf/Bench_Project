@@ -15,7 +15,7 @@ public class HttpStat {
 
 	@RequestMapping(value = "/200", method = RequestMethod.GET)
 	public HttpStatus Ok() {
-		return HttpStatus.ACCEPTED;
+		return HttpStatus.OK;
 	}
 
 	@RequestMapping(value = "/500", method = RequestMethod.GET)
